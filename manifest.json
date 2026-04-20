@@ -1,0 +1,13 @@
+{
+  "name": "UrDigi 飲食紀錄",
+  "short_name": "UrDigi",
+  "description": "AI 驅動的飲食紀錄 PWA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a237e",
+  "theme_color": "#1a237e",
+  "icons": [
+    { "src": "https://via.placeholder.com/192x192/1a237e/ff6d00?text=UD", "sizes": "192x192", "type": "image/png" },
+    { "src": "https://via.placeholder.com/512x512/1a237e/ff6d00?text=UD", "sizes": "512x512", "type": "image/png" }
+  ]
+}
