@@ -198,9 +198,8 @@ let weightChart = null;
 
 // ── Init ───────────────────────────────────────────────────
 window.onload = () => {
-  if (!localStorage.getItem('gemini_api_key')) { localStorage.setItem('gemini_api_key', 'AIzaSyAvJjqAZcNXHn9J3m8detDPpZX2qBsrd1Q'); }
-  const key = localStorage.getItem('gemini_api_key');
-  if (key) document.getElementById('api-key-card').style.display = 'none';
+  // API Key 已移至後端，不需要用戶輸入
+  document.getElementById('api-key-card').style.display = 'none';
   renderLog();
 };
 
@@ -245,38 +244,21 @@ function handleImage(e) {
 }
 
 async function analyzeFood() {
-  const key = localStorage.getItem('gemini_api_key');
-  if (!key) {
-    document.getElementById('api-key-card').style.display = 'block';
-    alert('請先設定 Gemini API Key');
-    return;
-  }
   document.getElementById('loading-box').style.display = 'block';
   document.getElementById('result-box').style.display = 'none';
 
-  const prompt = `你是專業營養師。請分析這張食物照片，用繁體中文JSON格式回答：
-{"name":"食物名稱","emoji":"適合的emoji","kcal":數字,"protein":蛋白質g數字,"carb":碳水g數字,"fat":脂肪g數字}
-只輸出JSON，不要其他文字。估算一般份量的數值。`;
-
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${key}`, {
+    const res = await fetch('https://urdigi-api.onrender.com/api/analyze', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [
-          { text: prompt },
-          { inline_data: { mime_type: 'image/jpeg', data: currentImage } }
-        ]}]
-      })
+      body: JSON.stringify({ imageBase64: currentImage, mimeType: 'image/jpeg' })
     });
-    const data = await res.json();
-    if (data.error) throw new Error(data.error.message);
-    const text = data.candidates[0].content.parts[0].text.trim();
-    const json = JSON.parse(text.replace(/```json|```/g,'').trim());
+    const json = await res.json();
+    if (json.error) throw new Error(json.error);
     currentResult = json;
     showResult(json);
   } catch(err) {
-    alert('辨識失敗：' + err.message + '\n\n請確認 API Key 正確，或改用手動輸入。');
+    alert('辨識失敗：' + err.message + '\n\n請稍後再試，或改用手動輸入。');
   } finally {
     document.getElementById('loading-box').style.display = 'none';
   }
