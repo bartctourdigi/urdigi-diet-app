@@ -1,13 +1,16 @@
 {
   "name": "UrDigi 飲食紀錄",
   "short_name": "UrDigi",
-  "description": "AI 驅動的飲食紀錄 PWA",
-  "start_url": "/",
+  "description": "AI 驅動的飲食紀錄 APP — 拍照辨識熱量、記錄營養素",
+  "start_url": "/urdigi-diet-app/",
+  "scope": "/urdigi-diet-app/",
   "display": "standalone",
-  "background_color": "#1a237e",
-  "theme_color": "#1a237e",
+  "orientation": "portrait",
+  "background_color": "#f4f7f4",
+  "theme_color": "#2D5A3D",
+  "lang": "zh-TW",
   "icons": [
-    { "src": "https://via.placeholder.com/192x192/1a237e/ff6d00?text=UD", "sizes": "192x192", "type": "image/png" },
-    { "src": "https://via.placeholder.com/512x512/1a237e/ff6d00?text=UD", "sizes": "512x512", "type": "image/png" }
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }
