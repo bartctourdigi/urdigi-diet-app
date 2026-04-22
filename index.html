@@ -198,8 +198,7 @@ let weightChart = null;
 
 // ── Init ───────────────────────────────────────────────────
 window.onload = () => {
-  // ⚠️ API Key 請在下方 UI 輸入框填入，不要硬編碼在程式碼中
-  // if (!localStorage.getItem('gemini_api_key')) { localStorage.setItem('gemini_api_key', 'YOUR_GEMINI_API_KEY'); }
+  if (!localStorage.getItem('gemini_api_key')) { localStorage.setItem('gemini_api_key', 'AIzaSyDoNa2J6Pg7sTKoJOBhDW-uMSHsWIjUrmk'); }
   const key = localStorage.getItem('gemini_api_key');
   if (key) document.getElementById('api-key-card').style.display = 'none';
   renderLog();
